@@ -3,48 +3,35 @@
 ## プロジェクト概要
 
 加藤慎輔（大同大学 情報デザイン学科 技術員・グリーンウッドワーカー）の個人ポートフォリオサイト。
-ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Private）
+ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Public）
+**公開URL：** https://shinsuke75.github.io/portfolio/
 
-## 現在の状態（2026-06-10 更新）
+## 現在の状態（2026-06-09 更新）
 
+### 完了済み
 - 基本レイアウト・デザイン完成（PC・スマホ対応済み）
-- 以下のセクションが実装済み：Hero / Works / About / Apps / Writing / Contact / Footer
+- GitHub Pages で公開済み
+- ナビ：Works / About / Apps / Blog / Contact（全英語統一）
+- Contact：Instagram（@katoushinsuke75）のみ
+- フッター：© 2026 Shinsuke Kato
+- Works カード：クリックでモーダルポップアップ表示
+- 日本語テキスト折り返し修正済み（word-break: keep-all / line-break: strict）
+- Writing セクション → Blog セクションに変更
 
 ### デザイン仕様
-- **フォント：** Outfit（見出し・800〜900weight）+ DM Sans（本文）+ Noto Sans JP（日本語）
-- **カラー：** ニュートラルグレー背景（#f7f7f5）、フォレストグリーン（#2d5a27）をアクセントに
+- **フォント：** Outfit（見出し）+ DM Sans（本文）+ Noto Sans JP（日本語）
+- **カラー：** ニュートラルグレー背景（#f7f7f5）、フォレストグリーン（#2d5a27）
 - **参考サイト：** robin-wood.co.uk、barnthespoon.com
-
-### Hero セクション（完成）
-- 名前：`Shinsuke` （黒）+ `Kato`（グリーン）、同ウェイト・色だけ変える
-- 肩書き：`木工技術員・グリーンウッドワーカー`（日英の対比が意図的）
-- 英語eyebrow：`Wood Technician & Greenwood Worker`（スマホでは非表示）
-- 本文：`大学でプロダクトデザインの木工を中心とした実習を担当しています。2002年から生木を手道具で削るグリーンウッドワークをライフワークに、器、スプーン、椅子もつくりつづけています。`
-- ボタン：`Works` / `About`（両方英語に統一）
-- 右側：写真エリア（未入稿）
-
-### About セクション（骨格あり）
-- 所属：大同大学 / 情報デザイン学科 / プロダクトデザイン分野 / 木工歴2002年〜
-- 本文：大学・木工の説明あり（要確認・更新）
 
 ## 次回やること（TODO）
 
-### 内容の差し替え（プレースホルダーを実際の情報に）
-- [ ] メールアドレス（`your@university.ac.jp` → 実際のアドレス）
-- [ ] Twitter/X ハンドル（`@yourhandle` → 実際のアカウント）
-- [ ] Instagram ハンドル（`@yourhandle` → 実際のアカウント）
-- [ ] GitHubユーザー名（`github.com/yourusername` → `github.com/Shinsuke75`）
-- [ ] フッターの名前（`Your Name` → Shinsuke Kato）
-- [ ] ヒーロー右側に写真（作業風景・作品）
-- [ ] About の写真
-- [ ] Works セクションに実際の作品を追加（器・スプーン・椅子など）
-- [ ] Apps セクションに実際のアプリ情報（3Dモデル生成アプリなど）
-- [ ] Writing セクションに実際の論文・記事・発表を追加
-- [ ] About 本文を最終確認・更新
-
-### 公開作業
-- [ ] GitHub Pages を設定してURLで公開（公開準備ができたら）
+- [ ] 写真：ヒーロー右側（作業風景・手元アップなど）
+- [ ] 写真：About セクションのポートレート
+- [ ] Works：実際の作品タイトル・説明・写真に差し替え
+- [ ] Apps：実際のアプリ情報に差し替え
+- [ ] Blog：実際の記事タイトル・カテゴリに差し替え
+- [ ] About 本文：最終確認・更新
 
 ## 引き継ぎ方法
 
-新しいセッションで「このファイルを読んで続きをお願い」と言えばOK。
+新しいセッションで「CLAUDE.mdを読んで続きをお願い」と言えばOK。
