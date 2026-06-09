@@ -360,6 +360,112 @@
       line-height: 1.65;
     }
 
+    .work-card { cursor: pointer; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      max-width: 680px;
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      animation: modal-in 0.25s ease;
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .modal-image {
+      aspect-ratio: 4/3;
+      background: var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.02;
+      background-image: repeating-linear-gradient(
+        2deg, transparent, transparent 14px,
+        #333 14px, #333 15px
+      );
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-body { padding: 2rem; }
+
+    .modal-meta {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .modal-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      word-break: keep-all;
+      line-break: strict;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .modal-close:hover { background: rgba(0,0,0,0.65); }
+
     /* ── About ── */
     #about { background: var(--bg); }
 
@@ -731,7 +837,7 @@
       <a href="#" class="btn btn-outline">すべて見る</a>
     </div>
     <div class="works-grid fade-in">
-      <a href="#" class="work-card">
+      <div class="work-card" data-modal="bowl">
         <div class="work-thumb">
           <span class="work-thumb-icon">🥣</span>
         </div>
@@ -740,8 +846,8 @@
           <div class="work-title">生木のボウル</div>
           <div class="work-desc">手斧とナイフだけで成形した食器。生木ならではのしなやかさと乾燥後の動きを楽しむ作品。</div>
         </div>
-      </a>
-      <a href="#" class="work-card">
+      </div>
+      <div class="work-card" data-modal="spoon">
         <div class="work-thumb">
           <span class="work-thumb-icon">🥄</span>
         </div>
@@ -750,8 +856,8 @@
           <div class="work-title">スプーンの連作</div>
           <div class="work-desc">季節ごとの枝を使い、素材の個性を活かしたスプーンたち。形はひとつひとつ違う。</div>
         </div>
-      </a>
-      <a href="#" class="work-card">
+      </div>
+      <div class="work-card" data-modal="wip">
         <div class="work-thumb">
           <span class="work-thumb-icon">🔮</span>
         </div>
@@ -760,7 +866,7 @@
           <div class="work-title">制作中の作品</div>
           <div class="work-desc">現在取り組んでいるプロジェクトです。近日公開予定。</div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
@@ -904,6 +1010,21 @@
   </div>
 </section>
 
+<!-- Work Modal -->
+<div class="modal-overlay" id="workModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-image" id="modalImage">
+      <span id="modalIcon" style="position:relative;opacity:0.4;font-size:5rem"></span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+    </div>
+  </div>
+</div>
+
 <footer>
   &copy; 2026 Shinsuke Kato. All rights reserved.
 </footer>
@@ -919,6 +1040,53 @@
   }, { threshold: 0.08 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Work modal
+  const works = {
+    bowl: {
+      icon: '🥣',
+      meta: 'Greenwood · Bowl',
+      title: '生木のボウル',
+      desc: '手斧とナイフだけで成形した食器。伐りたての生木を使うことで、乾燥していく過程で木が自然に動き、少しずつ形が変わっていく。その変化も含めて作品の一部。素材の個性をそのまま活かすことを大切にしています。'
+    },
+    spoon: {
+      icon: '🥄',
+      meta: 'Greenwood · Spoon',
+      title: 'スプーンの連作',
+      desc: '季節ごとに採った枝を使い、ひとつひとつ形の違うスプーンをつくり続けています。同じ樹種でも、採った時期・枝の太さ・曲がり方によって全く違う表情になる。手道具だけで削ることで、素材と対話しながら形を探していく過程そのものを楽しんでいます。'
+    },
+    wip: {
+      icon: '🔮',
+      meta: 'Coming Soon',
+      title: '制作中の作品',
+      desc: '現在取り組んでいるプロジェクトです。近日公開予定。'
+    }
+  };
+
+  const overlay = document.getElementById('workModal');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.work-card[data-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.modal;
+      const w = works[key];
+      document.getElementById('modalIcon').textContent = w.icon;
+      document.getElementById('modalMeta').textContent = w.meta;
+      document.getElementById('modalTitle').textContent = w.title;
+      document.getElementById('modalDesc').textContent = w.desc;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>
