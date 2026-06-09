@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Greenwood Worker & Researcher</title>
+  <title>Shinsuke Kato — Laboratory Technician & Greenwood Worker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #f7f3ed;
@@ -20,8 +20,8 @@
       --brown:     #7a5c38;
       --brown-lt:  #f0e8dc;
       --border:    #ddd5c8;
-      --serif:     'Playfair Display', Georgia, serif;
-      --sans:      'Inter', system-ui, sans-serif;
+      --display:   'Outfit', 'Noto Sans JP', sans-serif;
+      --sans:      'DM Sans', 'Noto Sans JP', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,9 +53,9 @@
     }
 
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--text);
       letter-spacing: 0.01em;
       text-decoration: none;
@@ -94,33 +94,36 @@
     }
 
     .hero-eyebrow {
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--green);
       font-weight: 600;
+      white-space: nowrap;
       margin-bottom: 1.5rem;
     }
 
     .hero-name {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       margin-bottom: 0.4rem;
+      color: var(--text);
     }
 
     .hero-name em {
-      font-style: italic;
+      font-style: normal;
+      font-weight: 800;
       color: var(--green);
     }
 
     .hero-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--brown);
-      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       margin-bottom: 2rem;
     }
 
@@ -255,15 +258,15 @@
     }
 
     .section-title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
       margin-bottom: 0.8rem;
     }
 
-    .section-title em { font-style: italic; color: var(--green); }
+    .section-title em { font-style: normal; font-weight: 300; color: var(--green); }
 
     .section-lead {
       color: var(--muted);
@@ -342,9 +345,9 @@
     }
 
     .work-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
       line-height: 1.3;
     }
@@ -429,7 +432,7 @@
     }
 
     .skills-heading {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: 1rem;
       font-weight: 600;
       margin: 2rem 0 1rem;
@@ -492,8 +495,8 @@
     }
 
     .app-name {
-      font-family: var(--serif);
-      font-size: 1.1rem;
+      font-family: var(--sans);
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
@@ -557,7 +560,7 @@
     }
 
     .writing-title {
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: 1.05rem;
       font-weight: 600;
       line-height: 1.35;
@@ -657,6 +660,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
+      .hero-eyebrow { display: none; }
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
       #hero { grid-template-columns: 1fr; }
@@ -679,7 +683,7 @@
 
 <!-- Nav -->
 <nav>
-  <a href="#" class="nav-logo">Your Name</a>
+  <a href="#" class="nav-logo">Shinsuke Kato</a>
   <ul class="nav-links">
     <li><a href="#works">作品</a></li>
     <li><a href="#about">About</a></li>
@@ -692,13 +696,11 @@
 <!-- Hero -->
 <section id="hero">
   <div class="hero-text">
-    <div class="hero-eyebrow">Greenwood Worker &amp; University Lecturer</div>
-    <h1 class="hero-name">Your<br><em>Name</em></h1>
-    <p class="hero-title">グリーンウッドワーカー・大学教員</p>
+    <div class="hero-eyebrow">Wood Technician &amp; Greenwood Worker</div>
+    <h1 class="hero-name">Shinsuke <em>Kato</em></h1>
+    <p class="hero-title">木工技術員・グリーンウッドワーカー</p>
     <p class="hero-desc">
-      生木（グリーンウッド）を手道具で削り、器やスプーンをつくる。
-      その傍ら、大学で〇〇を研究・教えている。
-      テクノロジーと手仕事が交わる場所に可能性を感じている。
+      大学でプロダクトデザインの木工を中心とした実習を担当しています。2002年から生木を手道具で削るグリーンウッドワークをライフワークに、器、スプーン、椅子もつくりつづけています。
     </p>
     <div class="hero-cta">
       <a href="#works" class="btn btn-primary">作品を見る</a>
@@ -771,9 +773,10 @@
         <div class="about-photo">
           <span class="about-photo-icon" style="font-size:4rem">🧑‍🏫</span>
         </div>
-        <div class="about-fact"><strong>所属</strong> ○○大学 ○○学部</div>
-        <div class="about-fact"><strong>専攻</strong> ○○学</div>
-        <div class="about-fact"><strong>拠点</strong> 東京 / 山梨</div>
+        <div class="about-fact"><strong>所属</strong> 大同大学</div>
+        <div class="about-fact"><strong>学科</strong> 情報デザイン学科</div>
+        <div class="about-fact"><strong>分野</strong> プロダクトデザイン</div>
+        <div class="about-fact"><strong>木工歴</strong> 2002年〜</div>
         <div class="about-fact"><strong>道具</strong> 手斧、ナイフ、ポールレース</div>
       </div>
       <div class="about-main fade-in">
@@ -781,26 +784,27 @@
         <h2 class="section-title">手と頭で<em>考える</em></h2>
         <div class="about-body">
           <p>
-            大学で〇〇を研究する傍ら、<strong>グリーンウッドワーク（生木細工）</strong>をライフワークとしています。
-            生木を手道具で削るこの仕事は、素材との対話であり、感覚を磨く修行でもあります。
+            大同大学 情報デザイン学科プロダクトデザイン分野の技術員として、
+            学生のものづくりを支える仕事をしています。
+          </p>
+          <p>
+            2002年から<strong>グリーンウッドワーク（生木細工）</strong>をライフワークとしています。
+            伐りたての生木を手斧やナイフで削り、器やスプーンをつくる。
+            素材の声を聞きながら形を探していく、この仕事が自分の原点です。
           </p>
           <p>
             近年は3Dモデル生成などのデジタル技術にも関心が広がっています。
-            手で削ることとコンピュータで形をつくることのあいだに、
-            何か面白いことがあるんじゃないかと探っているところです。
-          </p>
-          <p>
-            ワークショップや学内外の展示、オンラインツールの公開など、
-            広く開いた場を作ることを大切にしています。
+            手で削ることとコンピュータで形をつくること——
+            その間にある面白さを探っているところです。
           </p>
           <div class="skills-heading">専門・スキル</div>
           <div class="skills">
             <span class="skill">グリーンウッドワーク</span>
             <span class="skill">木工</span>
-            <span class="skill">ワークショップ設計</span>
+            <span class="skill">プロダクトデザイン</span>
+            <span class="skill">ワークショップ</span>
             <span class="skill brown">3Dモデリング</span>
             <span class="skill brown">生成AI</span>
-            <span class="skill brown">○○学</span>
           </div>
         </div>
       </div>
