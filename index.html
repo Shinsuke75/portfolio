@@ -464,9 +464,20 @@
 
     /* ── Profile expand ── */
     .profile-expand {
-      margin-top: 1.5rem;
+      margin-top: 3rem;
       border-top: 1px solid var(--border);
-      padding-top: 1.2rem;
+      padding-top: 1.5rem;
+    }
+
+    .profile-tables-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 3rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .profile-tables-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     }
 
     .profile-toggle {
@@ -966,36 +977,6 @@
         <div class="about-fact"><strong>学科</strong> 情報デザイン学科</div>
         <div class="about-fact"><strong>分野</strong> プロダクトデザイン</div>
 
-        <div class="profile-expand">
-          <button class="profile-toggle" id="profileToggle">
-            経歴を見る <span class="profile-toggle-icon">▼</span>
-          </button>
-          <div class="profile-details" id="profileDetails">
-
-            <div class="profile-section-title">プロフィール</div>
-            <table class="profile-table">
-              <tr><td>1975</td><td>愛知県名古屋市生まれ</td></tr>
-            </table>
-
-            <div class="profile-section-title">木工歴</div>
-            <table class="profile-table">
-              <tr><td>2000〜2007</td><td>宮本家具工房 木工教室にて木工を学ぶ</td></tr>
-              <tr><td>2002</td><td>英国にて、グリーンウッドワークの第一人者 マイク・アボット氏の椅子づくりコースに参加</td></tr>
-              <tr><td>2007.4〜2008.3</td><td>長野県上松技術専門校 入校・修了</td></tr>
-              <tr><td>2023〜現在</td><td>「みどりの工作室」を主宰（あいち海上の森センター・瀬戸市）</td></tr>
-            </table>
-
-            <div class="profile-section-title">職歴</div>
-            <table class="profile-table">
-              <tr><td>1996〜2007</td><td>造園・緑化業に従事</td></tr>
-              <tr><td>2008.4〜2009.4</td><td>NPO法人グリーンウッドワーク協会 代表（任期満了）</td></tr>
-              <tr><td>2008.5〜2009.11</td><td>木工の個人事業を開業</td></tr>
-              <tr><td>2010.3〜2011.4</td><td>造園会社に勤務</td></tr>
-              <tr><td>2011.4〜現在</td><td>大同大学 情報デザイン学科 技術員・非常勤講師</td></tr>
-            </table>
-
-          </div>
-        </div>
       </div>
       <div class="about-main fade-in">
         <div class="section-label">About</div>
@@ -1025,6 +1006,37 @@
         </div>
       </div>
     </div>
+
+    <div class="profile-expand fade-in">
+      <button class="profile-toggle" id="profileToggle">
+        経歴を見る <span class="profile-toggle-icon">▼</span>
+      </button>
+      <div class="profile-details" id="profileDetails">
+        <div class="profile-tables-grid">
+
+          <div>
+            <div class="profile-section-title">プロフィール・木工歴</div>
+            <table class="profile-table">
+              <tr><td>1975</td><td>愛知県名古屋市生まれ</td></tr>
+              <tr><td>2000〜2007</td><td>宮本家具工房 木工教室にて木工を学ぶ</td></tr>
+              <tr><td>2002</td><td>英国にて、グリーンウッドワークの第一人者 マイク・アボット氏の椅子づくりコースに参加</td></tr>
+              <tr><td>2007〜2008</td><td>長野県上松技術専門校 入校・修了</td></tr>
+              <tr><td>2023〜現在</td><td>「みどりの工作室」を主宰（あいち海上の森センター・瀬戸市）</td></tr>
+            </table>
+          </div>
+
+          <div>
+            <div class="profile-section-title">職歴</div>
+            <table class="profile-table">
+              <tr><td>1996〜2007</td><td>造園・緑化業に従事</td></tr>
+              <tr><td>2011〜現在</td><td>大同大学 情報デザイン学科 技術員・非常勤講師</td></tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
