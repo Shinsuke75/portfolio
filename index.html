@@ -472,21 +472,29 @@
     .profile-toggle {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.82rem;
+      justify-content: space-between;
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--green);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
       letter-spacing: 0.04em;
+      color: var(--text);
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
     }
 
-    .profile-toggle:hover { opacity: 0.75; }
+    .profile-toggle:hover,
+    .profile-toggle.open {
+      border-color: var(--green);
+      color: var(--green);
+    }
 
     .profile-toggle-icon {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       transition: transform 0.25s;
     }
 
@@ -957,8 +965,6 @@
         <div class="about-fact"><strong>所属</strong> 大同大学</div>
         <div class="about-fact"><strong>学科</strong> 情報デザイン学科</div>
         <div class="about-fact"><strong>分野</strong> プロダクトデザイン</div>
-        <div class="about-fact"><strong>木工歴</strong> 2002年〜</div>
-        <div class="about-fact"><strong>道具</strong> 手斧、ナイフ、ポールレース</div>
 
         <div class="profile-expand">
           <button class="profile-toggle" id="profileToggle">
@@ -1005,9 +1011,7 @@
             木の声を聞きながら形を探していく、この仕事が自分の原点です。
           </p>
           <p>
-            近年は3DCADや生成AIなどのデジタル技術にも関心が広がっています。
-            手で削ることとコンピュータで形をつくること——
-            その間にある面白さを探っているところです。
+            近年は3DCADや生成AIなどのデジタル技術にも関心が広がっています。手で削ることと、コンピュータで形をつくること。その間にある面白さを探っているところです。
           </p>
           <div class="skills-heading">専門・スキル</div>
           <div class="skills">
