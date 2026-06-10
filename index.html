@@ -462,6 +462,83 @@
 
     .modal-close:hover { background: rgba(0,0,0,0.65); }
 
+    /* ── Profile expand ── */
+    .profile-expand {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.2rem;
+    }
+
+    .profile-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--green);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .profile-toggle:hover { opacity: 0.75; }
+
+    .profile-toggle-icon {
+      font-size: 0.7rem;
+      transition: transform 0.25s;
+    }
+
+    .profile-toggle.open .profile-toggle-icon { transform: rotate(180deg); }
+
+    .profile-details {
+      display: none;
+      margin-top: 1.2rem;
+    }
+
+    .profile-details.open { display: block; }
+
+    .profile-section-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--green);
+      margin: 1.4rem 0 0.6rem;
+    }
+
+    .profile-section-title:first-child { margin-top: 0; }
+
+    .profile-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .profile-table td {
+      padding: 0.4rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .profile-table td:first-child {
+      white-space: nowrap;
+      padding-right: 1rem;
+      color: var(--text);
+      font-weight: 500;
+      width: 1%;
+    }
+
+    @media (max-width: 480px) {
+      .profile-table tr { display: flex; flex-direction: column; }
+      .profile-table td { border-bottom: none; padding: 0.15rem 0; }
+      .profile-table td:first-child { padding-right: 0; }
+      .profile-table tr + tr td:first-child { margin-top: 0.6rem; border-top: 1px solid var(--border); padding-top: 0.6rem; }
+    }
+
     /* ── About ── */
     #about { background: var(--bg); }
 
@@ -882,6 +959,37 @@
         <div class="about-fact"><strong>分野</strong> プロダクトデザイン</div>
         <div class="about-fact"><strong>木工歴</strong> 2002年〜</div>
         <div class="about-fact"><strong>道具</strong> 手斧、ナイフ、ポールレース</div>
+
+        <div class="profile-expand">
+          <button class="profile-toggle" id="profileToggle">
+            経歴を見る <span class="profile-toggle-icon">▼</span>
+          </button>
+          <div class="profile-details" id="profileDetails">
+
+            <div class="profile-section-title">プロフィール</div>
+            <table class="profile-table">
+              <tr><td>1975</td><td>愛知県名古屋市生まれ</td></tr>
+            </table>
+
+            <div class="profile-section-title">木工歴</div>
+            <table class="profile-table">
+              <tr><td>2000〜2007</td><td>宮本家具工房 木工教室にて木工を学ぶ</td></tr>
+              <tr><td>2002</td><td>英国にて、グリーンウッドワークの第一人者 マイク・アボット氏の椅子づくりコースに参加</td></tr>
+              <tr><td>2007.4〜2008.3</td><td>長野県上松技術専門校 入校・修了</td></tr>
+              <tr><td>2023〜現在</td><td>「みどりの工作室」を主宰（あいち海上の森センター・瀬戸市）</td></tr>
+            </table>
+
+            <div class="profile-section-title">職歴</div>
+            <table class="profile-table">
+              <tr><td>1996〜2007</td><td>造園・緑化業に従事</td></tr>
+              <tr><td>2008.4〜2009.4</td><td>NPO法人グリーンウッドワーク協会 代表（任期満了）</td></tr>
+              <tr><td>2008.5〜2009.11</td><td>木工の個人事業を開業</td></tr>
+              <tr><td>2010.3〜2011.4</td><td>造園会社に勤務</td></tr>
+              <tr><td>2011.4〜現在</td><td>大同大学 情報デザイン学科 技術員・非常勤講師</td></tr>
+            </table>
+
+          </div>
+        </div>
       </div>
       <div class="about-main fade-in">
         <div class="section-label">About</div>
@@ -1036,6 +1144,14 @@
   }, { threshold: 0.08 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Profile expand
+  const profileToggle = document.getElementById('profileToggle');
+  const profileDetails = document.getElementById('profileDetails');
+  profileToggle.addEventListener('click', () => {
+    const isOpen = profileDetails.classList.toggle('open');
+    profileToggle.classList.toggle('open', isOpen);
+  });
 
   // Work modal
   const works = {
