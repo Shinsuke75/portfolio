@@ -266,7 +266,7 @@
       margin-bottom: 0.8rem;
     }
 
-    .section-title em { font-style: normal; font-weight: 300; color: var(--green); }
+    .section-title em { font-style: normal; font-weight: 800; color: var(--green); }
 
     .section-lead {
       color: var(--muted);
@@ -600,17 +600,24 @@
     }
 
     .about-fact {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--faint);
+      margin-bottom: 0.6rem;
       display: flex;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 0.1rem;
     }
 
     .about-fact strong {
       color: var(--text);
+      font-weight: 400;
+      font-size: 0.78rem;
+    }
+
+    .about-fact-value {
+      color: var(--text);
       font-weight: 600;
-      min-width: 60px;
+      font-size: 1rem;
     }
 
     .about-main {}
@@ -973,9 +980,9 @@
         <div class="about-photo">
           <span class="about-photo-icon" style="font-size:4rem">🧑‍🏫</span>
         </div>
-        <div class="about-fact"><strong>所属</strong> 大同大学</div>
-        <div class="about-fact"><strong>学科</strong> 情報デザイン学科</div>
-        <div class="about-fact"><strong>分野</strong> プロダクトデザイン</div>
+        <div class="about-fact"><strong>所属</strong><span class="about-fact-value">大同大学</span></div>
+        <div class="about-fact"><strong>学科</strong><span class="about-fact-value">情報デザイン学科</span></div>
+        <div class="about-fact"><strong>分野</strong><span class="about-fact-value">プロダクトデザイン</span></div>
 
       </div>
       <div class="about-main fade-in">
