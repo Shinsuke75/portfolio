@@ -47,3 +47,49 @@
 ## 引き継ぎ方法
 
 新しいセッションで「CLAUDE.mdを読んで続きをお願い」と言えばOK。
+
+---
+
+# mokusanアプリ — 作業メモ
+
+## プロジェクト概要
+
+木材値札OCR＋積算計算機 Webアプリ。
+GitHub: `Shinsuke75/mokusan`（Public）
+**公開URL：** https://mokusan.vercel.app
+**ローカル：** `C:\Users\katou\OneDrive\Desktop\mokusan-fix\`
+
+## 現在の状態（2026-06-11 更新）
+
+### 完了済み
+- Vercel デプロイ済み・本番稼働中
+- Gemini OCR: gemini-2.5-flash (v1beta) で正常動作
+- Google Sheets への記録機能: 動作確認済み
+- Geolocation + Nominatim による位置自動取得: 動作中
+- **都道府県フォールバック修正済み**（`address.state` → `address.province` → `display_name` 正規表現の順で取得。「愛知県」など正常表示を確認）
+- **Gemini 503自動リトライ実装済み**（1s/2s/4s、最大3回）
+
+### 技術スタック
+- フロントエンド: HTML/CSS/JavaScript（バニラ）
+- バックエンド: Vercel Serverless Functions（Node.js ESM）
+- OCR: Google Gemini 2.5 Flash API（v1beta）、前払い2000円チャージ済み（1リクエスト約0.001〜0.003円）
+- データ: Google Sheets API（サービスアカウント認証）
+- 位置情報: Nominatim（OpenStreetMap、APIキー不要）
+
+### Vercel 環境変数（設定済み）
+- `GEMINI_API_KEY`
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+- `GOOGLE_SPREADSHEET_ID`: `11vq4iYq31GggZ8mOKaujV80ooL0-3f8D6LMCD7YEmCg`
+- `GOOGLE_SHEET_NAME`: `シート1`
+- `NOMINATIM_CONTACT_EMAIL`
+
+### スプレッドシートの列構成
+日付 / 都道府県 / 市区町村 / 店舗名 / 樹種 / 幅mm / 高さmm / 長さmm / 価格円 / 本数 / 立米単価(円/m³) / 備考
+
+## 次回やること（TODO）
+
+- [ ] フェーズ2：積算計算機モード
+  - 蓄積データから樹種・都道府県を選んで平均立米単価を自動入力
+  - 寸法×本数を入力 → 金額計算
+  - 材料リストに追加して合計を出す
