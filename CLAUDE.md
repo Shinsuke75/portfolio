@@ -6,7 +6,7 @@
 ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Public）
 **公開URL：** https://shinsuke75.github.io/portfolio/
 
-## 現在の状態（2026-06-10 更新）
+## 現在の状態（2026-06-29 更新）
 
 ### 完了済み
 - 基本レイアウト・デザイン完成（PC・スマホ対応済み）
@@ -26,6 +26,10 @@
   - 所属/学科/分野：ラベルを小さく薄く、値（大同大学など）を大きく太く（縦積み）
   - .section-title の em（「考える」「作品集」等）：font-weight 800 に
 - 日本語折り返し：word-break/line-break の指定はやめてデフォルトに戻した（スマホはみ出し対策）
+- **Apps セクション完成**：プレースホルダー2枚を削除し、実物の「geo-ball」カード1枚に差し替え
+  - geo-ball = 正二十面体ベースのジオデシック球をブラウザで設計しSTL出力する単一HTMLのWebアプリ（Three.js / Manifold-3d WASM / Web Worker）
+  - 公開URL：https://shinsuke75.github.io/geo-ball/ （別GitHubリポジトリ Shinsuke75/geo-ball）
+  - カードはクリックで別タブ表示・バッジ「公開中」
 
 ### デザイン仕様
 - **フォント：** Outfit（見出し）+ DM Sans（本文）+ Noto Sans JP（日本語）
@@ -41,8 +45,8 @@
 
 - [ ] 写真：ヒーロー右側（作業風景・手元アップなど）← ユーザーが写真を探し中
 - [ ] 写真：About セクションのポートレート
-- [ ] Apps：実際のアプリ情報に差し替え
-- [ ] Blog：実際の記事タイトル・カテゴリに差し替え
+- [x] Apps：geo-ball に差し替え済み（2026-06-29 完了）
+- [ ] Blog：実際の記事タイトル・カテゴリに差し替え（今は仮タイトル4枚。過去に書いたブログ記事を流用できるか検討中）
 
 ## 引き継ぎ方法
 
