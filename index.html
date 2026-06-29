@@ -779,6 +779,30 @@
       color: var(--muted);
     }
 
+    .blog-loading {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-loading a { color: var(--green); }
+
+    .blog-more {
+      margin-top: 2.5rem;
+    }
+
+    .blog-more a {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .blog-more a:hover { border-color: var(--green); }
+
     /* ── Contact ── */
     #contact {
       background: var(--green);
@@ -1087,27 +1111,11 @@
       <h2 class="section-title">気になること、<em>考えたこと</em></h2>
       <p class="section-lead">グリーンウッドワーク、道具、素材、デジタルものづくり——興味のある分野について書いています。</p>
     </div>
-    <div class="writing-grid fade-in">
-      <a href="#" class="writing-card">
-        <div class="writing-type">グリーンウッドワーク · 2026</div>
-        <div class="writing-title">記事タイトルをここに</div>
-        <div class="writing-meta">2026年6月</div>
-      </a>
-      <a href="#" class="writing-card">
-        <div class="writing-type">道具 · 2026</div>
-        <div class="writing-title">記事タイトルをここに</div>
-        <div class="writing-meta">2026年5月</div>
-      </a>
-      <a href="#" class="writing-card">
-        <div class="writing-type">3Dモデリング · 2026</div>
-        <div class="writing-title">記事タイトルをここに</div>
-        <div class="writing-meta">2026年4月</div>
-      </a>
-      <a href="#" class="writing-card">
-        <div class="writing-type">木工 · 2026</div>
-        <div class="writing-title">記事タイトルをここに</div>
-        <div class="writing-meta">2026年3月</div>
-      </a>
+    <div class="writing-grid fade-in" id="blogList">
+      <div class="blog-loading">記事を読み込んでいます…</div>
+    </div>
+    <div class="blog-more fade-in">
+      <a href="https://gwood-life.blogspot.com/" target="_blank" rel="noopener">ブログをすべて見る →</a>
     </div>
   </div>
 </section>
@@ -1219,6 +1227,53 @@
   modalClose.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Blog feed (Blogger / gwood-life) — 投稿すると自動で最新記事が並ぶ
+  (function () {
+    const BLOG_URL = 'https://gwood-life.blogspot.com/';
+    const list = document.getElementById('blogList');
+    if (!list) return;
+
+    const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s == null ? '' : s;
+      return d.innerHTML;
+    }
+
+    window.renderBlogPosts = function (data) {
+      const entries = (data && data.feed && data.feed.entry) || [];
+      if (!entries.length) {
+        list.innerHTML = '<div class="blog-loading">まだ記事がありません。</div>';
+        return;
+      }
+      list.innerHTML = entries.map(function (e) {
+        const title = (e.title && e.title.$t) || '（無題）';
+        let href = BLOG_URL;
+        (e.link || []).forEach(function (l) { if (l.rel === 'alternate') href = l.href; });
+        const label = (e.category && e.category[0] && e.category[0].term) || 'Blog';
+        let dateStr = '';
+        if (e.published && e.published.$t) {
+          const d = new Date(e.published.$t);
+          dateStr = d.getFullYear() + '年' + months[d.getMonth()];
+        }
+        return '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="writing-card">' +
+          '<div class="writing-type">' + esc(label) + '</div>' +
+          '<div class="writing-title">' + esc(title) + '</div>' +
+          '<div class="writing-meta">' + esc(dateStr) + '</div>' +
+        '</a>';
+      }).join('');
+    };
+
+    const s = document.createElement('script');
+    s.src = BLOG_URL + 'feeds/posts/default?alt=json-in-script&callback=renderBlogPosts&max-results=4';
+    s.onerror = function () {
+      list.innerHTML = '<div class="blog-loading">記事を読み込めませんでした。 ' +
+        '<a href="' + BLOG_URL + '" target="_blank" rel="noopener">ブログを見る →</a></div>';
+    };
+    document.body.appendChild(s);
+  })();
 </script>
 </body>
 </html>
