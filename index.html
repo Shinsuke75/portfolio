@@ -745,7 +745,8 @@
     }
 
     .writing-card {
-      padding: 2rem;
+      padding: 0;
+      overflow: hidden;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 4px;
@@ -756,6 +757,23 @@
     }
 
     .writing-card:hover { border-color: var(--green); }
+
+    .writing-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--green-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      opacity: 0.95;
+    }
+
+    .writing-card-body {
+      padding: 1.75rem;
+    }
 
     .writing-type {
       font-size: 0.72rem;
@@ -1258,10 +1276,30 @@
           const d = new Date(e.published.$t);
           dateStr = d.getFullYear() + '年' + months[d.getMonth()];
         }
+
+        // サムネイル画像：まず media$thumbnail、無ければ本文の最初の <img>
+        let img = '';
+        const thumb = e['media$thumbnail'];
+        if (thumb && thumb.url) {
+          // 小さいサムネ(s72-c)を大きめの切り抜きに差し替え
+          img = thumb.url.replace(/\/s\d+(-c)?\//, '/w600-h375-p-k-no-nu/');
+        } else {
+          const body = (e.content && e.content.$t) || (e.summary && e.summary.$t) || '';
+          const m = body.match(/<img[^>]+src=["']([^"']+)["']/i);
+          if (m) img = m[1];
+        }
+
+        const thumbHtml = img
+          ? '<div class="writing-thumb" style="background-image:url(\'' + esc(img) + '\')"></div>'
+          : '<div class="writing-thumb">🌿</div>';
+
         return '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="writing-card">' +
-          '<div class="writing-type">' + esc(label) + '</div>' +
-          '<div class="writing-title">' + esc(title) + '</div>' +
-          '<div class="writing-meta">' + esc(dateStr) + '</div>' +
+          thumbHtml +
+          '<div class="writing-card-body">' +
+            '<div class="writing-type">' + esc(label) + '</div>' +
+            '<div class="writing-title">' + esc(title) + '</div>' +
+            '<div class="writing-meta">' + esc(dateStr) + '</div>' +
+          '</div>' +
         '</a>';
       }).join('');
     };
