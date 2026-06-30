@@ -682,74 +682,6 @@
       color: var(--brown);
     }
 
-    /* ── Apps ── */
-    #apps { background: var(--white); }
-
-    .apps-header {
-      margin-bottom: 3.5rem;
-    }
-
-    .apps-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-
-    .app-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      background: var(--bg);
-      transition: border-color 0.2s, background 0.2s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .app-card:hover {
-      border-color: var(--green);
-      background: var(--green-lt);
-    }
-
-    .app-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .app-name {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .app-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .app-badge {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-      padding: 0.25rem 0.7rem;
-      border-radius: 2px;
-    }
-
-    .badge-wip {
-      background: var(--brown-lt);
-      color: var(--brown);
-    }
-
-    .badge-live {
-      background: var(--green-lt);
-      color: var(--green);
-    }
-
     /* ── Writing / Research ── */
     #writing { background: var(--bg2); }
 
@@ -934,7 +866,7 @@
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-photo { aspect-ratio: 4/3; }
       .works-grid { grid-template-columns: 1fr; }
-      .apps-list, .writing-grid { grid-template-columns: 1fr; }
+      .writing-grid { grid-template-columns: 1fr; }
       #contact .section-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
@@ -951,7 +883,6 @@
   <ul class="nav-links">
     <li><a href="#works">Works</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#apps">Apps</a></li>
     <li><a href="#writing">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -988,8 +919,8 @@
     <div class="works-header fade-in">
       <div>
         <div class="section-label">Works</div>
-        <h2 class="section-title">作品集</h2>
-        <p class="section-lead">生木を削るグリーンウッドワークを軸に、素材や技法を問わず手がけてきた作品を紹介します。</p>
+        <h2 class="section-title">作品と<em>ツール</em></h2>
+        <p class="section-lead">生木を削るグリーンウッドワークから、ブラウザで動くツールまで。素材や技法を問わず手がけてきたものを紹介します。</p>
       </div>
       <a href="#" class="btn btn-outline">すべて見る</a>
     </div>
@@ -1024,6 +955,16 @@
           <div class="work-desc">ドローナイフで削り出したパーツを組み合わせた椅子。座面は草で編んで作る。乾燥とともに継手が締まり、強度が増していく。</div>
         </div>
       </div>
+      <a href="https://shinsuke75.github.io/geo-ball/" target="_blank" rel="noopener" class="work-card">
+        <div class="work-thumb">
+          <span class="work-thumb-icon">🌐</span>
+        </div>
+        <div class="work-body">
+          <div class="work-meta">Digital · Web App</div>
+          <div class="work-title">geo-ball</div>
+          <div class="work-desc">ジオデシック球をブラウザで設計し、3Dプリント用のSTLを書き出せるWebアプリ。クリックで開きます。</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1108,30 +1049,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- Apps & Tools -->
-<section id="apps">
-  <div class="section-inner">
-    <div class="apps-header fade-in">
-      <div class="section-label">Apps &amp; Tools</div>
-      <h2 class="section-title">アプリ・ツール</h2>
-      <p class="section-lead">制作中・公開中のウェブアプリやインタラクティブなツールです。</p>
-    </div>
-    <div class="apps-list fade-in">
-      <a href="https://shinsuke75.github.io/geo-ball/" target="_blank" rel="noopener" class="app-card">
-        <div class="app-icon">🌐</div>
-        <div class="app-name">geo-ball</div>
-        <div class="app-desc">
-          正二十面体をベースにしたジオデシック球（測地線ドーム状の骨組み構造）を、ブラウザだけで設計してSTLファイルに書き出せるWebアプリ。
-          直径・骨の太さ・分割の細かさ・穴のパターンをスライダーで変えると3Dプレビューがリアルタイムに更新され、そのまま3Dプリント用データを生成できます。
-        </div>
-        <span class="app-badge badge-live">公開中</span>
-      </a>
-    </div>
   </div>
 </section>
 
