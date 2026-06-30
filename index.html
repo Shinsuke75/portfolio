@@ -833,6 +833,79 @@
       font-size: 0.95rem;
     }
 
+    /* contact form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-field label {
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      padding: 0.75rem 0.9rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-field textarea { resize: vertical; }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .form-submit {
+      align-self: flex-start;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--green);
+      background: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.85; }
+    .form-submit:disabled { opacity: 0.5; cursor: default; }
+
+    .form-status {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      min-height: 1.2em;
+    }
+    .form-status.ok { color: #d6f5d0; }
+    .form-status.err { color: #ffdada; }
+
+    .contact-or {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 0.75rem;
+    }
+
     /* ── Footer ── */
     footer {
       background: #1a3318;
@@ -1078,10 +1151,28 @@
       <div class="section-label">Contact</div>
       <h2 class="section-title">連絡先</h2>
       <p class="section-lead" style="color:rgba(255,255,255,0.7);margin-top:1rem;">
-        「こんなことできる?」のご相談やお問い合わせは、インスタグラムのDMからどうぞ。
+        「こんなことできる?」のご相談やお問い合わせは、下のフォームか、インスタグラムのDMからどうぞ。
       </p>
     </div>
     <div class="contact-links fade-in">
+      <form class="contact-form" id="contactForm">
+        <div class="form-field">
+          <label for="cf-name">お名前</label>
+          <input id="cf-name" type="text" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="cf-email">メールアドレス</label>
+          <input id="cf-email" type="email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="cf-message">ご相談・お問い合わせ内容</label>
+          <textarea id="cf-message" name="message" rows="5" required></textarea>
+        </div>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <button type="submit" class="form-submit">送信する</button>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </form>
+      <p class="contact-or">または、インスタグラムのDMでも。</p>
       <a href="https://instagram.com/katoushinsuke75" class="contact-link">
         <span class="contact-link-icon">📷</span>
         <div>
@@ -1244,6 +1335,44 @@
         '<a href="' + BLOG_URL + '" target="_blank" rel="noopener">ブログを見る →</a></div>';
     };
     document.body.appendChild(s);
+  })();
+
+  // Contact form (FormSubmit / AJAX) — メールアドレスは載せず専用トークンで送信
+  (function () {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/FORMSUBMIT_TOKEN'; // ← 有効化後にトークンを差し替え
+    const statusEl = document.getElementById('formStatus');
+    const btn = form.querySelector('.form-submit');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (form.querySelector('[name=_honey]').value) return; // スパムbot対策
+      statusEl.className = 'form-status';
+      statusEl.textContent = '送信中…';
+      btn.disabled = true;
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('cf-name').value,
+            email: document.getElementById('cf-email').value,
+            message: document.getElementById('cf-message').value,
+            _subject: 'ポートフォリオサイトからの問い合わせ'
+          })
+        });
+        if (!res.ok) throw new Error('failed');
+        statusEl.className = 'form-status ok';
+        statusEl.textContent = '送信しました。ありがとうございます。お返事までしばらくお待ちください。';
+        form.reset();
+      } catch (err) {
+        statusEl.className = 'form-status err';
+        statusEl.textContent = '送信に失敗しました。お手数ですが、インスタグラムのDMからご連絡ください。';
+      } finally {
+        btn.disabled = false;
+      }
+    });
   })();
 </script>
 </body>
