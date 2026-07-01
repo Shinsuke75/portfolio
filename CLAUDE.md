@@ -6,13 +6,13 @@
 ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Public）
 **公開URL：** https://shinsuke75.github.io/portfolio/
 
-## 現在の状態（2026-06-29 更新）
+## 現在の状態（2026-07-01 更新）
 
 ### 完了済み
 - 基本レイアウト・デザイン完成（PC・スマホ対応済み）
 - GitHub Pages で公開済み
 - ナビ：Works / About / Blog / Contact（全英語統一。Appsは廃止しWorksに統合）
-- Contact：Instagram（@katoushinsuke75）のみ
+- Contact：問い合わせフォーム＋Instagram（@katoushinsuke75）
 - フッター：© 2026 Shinsuke Kato
 - Works カード：クリックでモーダルポップアップ表示
 - Works 内容：生木のボウル／スプーンの連作／生木の椅子（実際の説明文に更新済み）
@@ -47,6 +47,28 @@
   - 送信は FormSubmit（無料・登録不要）。メールアドレスは公開コードに載せず、エイリアス `https://formsubmit.co/ajax/b70abd8a69f30e0cd402c3247a5db9de` で送信（実体は katoushinsuke75@gmail.com）
   - 有効化はサンドボックスから不可（プロキシが formsubmit.co を遮断）→ 一時 activate.html を公開しユーザーのブラウザで有効化→済んだら削除。動作確認OK
   - サブミット件名は「ポートフォリオサイトからの問い合わせ」。今後は1問い合わせ＝1通
+- **ヒーロー写真：AI生成トライ中断（2026-07-01）**
+  - ChatGPTで「生木を削る手元」の写真を生成→3回プロンプト調整（握り方の不自然さ→修正、スプーン全体→くびれを削る場面）まで到達したが、サイトへの組み込み前に中断
+  - 生成画像はチャットに貼られただけでファイルとして未保存（`/root/.claude/uploads/.../`には入っていない）→次回組み込むには**再度貼ってもらう**か**GitHubに直接アップロード**してもらう必要あり
+  - Google Drive連携（MCP）がこのセッションで不安定（許可を押しても`requires approval`エラーが繰り返し発生）→ドライブ経由の受け渡しは今回断念。次回は素直にGitHub Web UIから`Add file→Upload files`でアップロードしてもらうのが確実
+  - 最終的に採用したプロンプト（スプーンのくびれを削る場面）は下記「ヒーロー画像生成プロンプト」に保存
+  - 本人は「実物を自分で撮影する」意向あり（AI画像はつなぎ利用の想定）。休みにボウル・スプーン・椅子の実物撮影も予定
+
+### ヒーロー画像生成プロンプト（2026-07-01時点の最終版・スプーンのくびれ）
+
+```
+Close-up photograph of a greenwood carver's hands refining the neck of a
+wooden spoon — the narrow curved transition where the rounded bowl meets
+the slender handle — carved from fresh green wood, green bark still
+visible on the edges. The right hand holds a small carving (sloyd) knife,
+making a careful controlled cut right at the narrow waist of the spoon to
+shape its graceful curve; a thin shaving peels off and curls into the air.
+The bowl of the spoon is clearly visible at one end. Natural soft window
+light from the side, shallow depth of field, warm authentic mood, pale
+cream background with natural wood tones and a hint of forest green.
+Documentary editorial style, realistic, high detail on wood grain and
+blade. No face, hands only. Vertical composition, 50mm lens, f/2.0.
+```
 
 ### デザイン仕様
 - **フォント：** Outfit（見出し）+ DM Sans（本文）+ Noto Sans JP（日本語）
@@ -60,8 +82,9 @@
 
 ## 次回やること（TODO）
 
-- [ ] 写真：ヒーロー右側（作業風景・手元アップなど）← ユーザーが写真を探し中
+- [ ] 写真：ヒーロー右側（作業風景・手元アップなど）← AI生成トライ中断。実物撮影 or 画像をGitHub直アップロードで再挑戦
 - [ ] 写真：About セクションのポートレート
+- [ ] 写真：Works（ボウル／スプーン／椅子）の実物写真 ← 本人が撮影予定
 - [x] Apps：geo-ball に差し替え→Worksに統合済み（2026-06-30 完了）
 - [x] Blog：Blogger（gwood-life）連動で自動表示に（2026-06-30 完了。仮タイトル差し替えは不要に）
 - [ ] Works：「越境した仕事」をさらに追加できると新コンセプトが補強される
