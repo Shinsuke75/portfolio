@@ -6,7 +6,7 @@
 ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Public）
 **公開URL：** https://shinsuke75.github.io/portfolio/
 
-## 現在の状態（2026-07-01 更新）
+## 現在の状態（2026-07-02 更新）
 
 ### 完了済み
 - 基本レイアウト・デザイン完成（PC・スマホ対応済み）
@@ -53,6 +53,17 @@
   - Google Drive連携（MCP）がこのセッションで不安定（許可を押しても`requires approval`エラーが繰り返し発生）→ドライブ経由の受け渡しは今回断念。次回は素直にGitHub Web UIから`Add file→Upload files`でアップロードしてもらうのが確実
   - 最終的に採用したプロンプト（スプーンのくびれを削る場面）は下記「ヒーロー画像生成プロンプト」に保存
   - 本人は「実物を自分で撮影する」意向あり（AI画像はつなぎ利用の想定）。休みにボウル・スプーン・椅子の実物撮影も予定
+
+- **デザインリデザイン反映（2026-07-02）**：ユーザー提供の design handoff zip（design_handoff_portfolio_redesign）を反映
+  - ヘアライン罫線（--hairline: #d8d8d2）ベースの端正なスタイルに刷新。角丸・絵文字アイコン全廃（Instagram はインラインSVG）
+  - セクション通し番号（01 Works〜04 Contact）、ヒーロー下に情報バー（Since 2002 / Daido University / Scroll）
+  - Works は2列のエディトリアル調カード（3列時の空セル問題を解消）。死にリンク「すべて見る」削除
+  - フォントは Outfit + Noto Sans JP に統一（DM Sans 削除）。明朝は検討の末不採用
+  - モーダルのアクセシビリティ改善（role="dialog" / フォーカストラップ / Enter・Space・Esc）
+  - 既存機能はすべて維持（Bloggerフィード・FormSubmitフォーム・モーダル・経歴開閉・フェードイン）。文章も原文のまま（検証済み）
+  - **写真プレースホルダーは `<image-slot>` カスタム要素**（image-slot.js、デザインツール環境専用）。本番では空表示になるだけで無害
+  - 写真が用意でき次第、各 `<image-slot id="...">` を `<img src="assets/〜.jpg" ...>` に置き換え、全部済んだら image-slot.js の script タグを削除（README のA案）
+  - 必要な写真：hero-photo（縦長）／work-bowl・work-spoon・work-chair・work-geoball（4:3）／about-photo（3:4）／modal-bowl・modal-spoon・modal-chair（4:3）
 
 ### ヒーロー画像生成プロンプト（2026-07-01時点の最終版・スプーンのくびれ）
 
