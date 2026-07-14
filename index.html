@@ -26,8 +26,9 @@
       --sans:      'Noto Sans JP', 'Outfit', sans-serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; min-width: 0; }
     html { scroll-behavior: smooth; }
+    html, body { overflow-x: clip; }
 
     body {
       background: var(--bg);
@@ -1015,8 +1016,16 @@
     }
 
     @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-logo { white-space: nowrap; font-size: 0.95rem; }
+      .nav-links { gap: 1.1rem; }
+      .nav-links a { font-size: 0.68rem; letter-spacing: 0.12em; }
       .nav-links li:nth-child(3) { display: none; }
       .hero-foot span:nth-child(2) { display: none; }
+      /* 英字ラベルの nowrap がグリッドを押し広げないよう改行を許可 */
+      .hero-eyebrow { white-space: normal; line-height: 1.7; }
+      .hero-name { font-size: clamp(2.4rem, 11.5vw, 3rem); }
+      .hero-text { padding: 3.5rem 1.5rem; }
     }
   </style>
 </head>
