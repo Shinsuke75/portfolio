@@ -6,7 +6,7 @@
 ファイルは `index.html` 1枚構成。GitHub: `Shinsuke75/portfolio`（Public）
 **公開URL：** https://shinsuke75.github.io/portfolio/
 
-## 現在の状態（2026-07-02 更新）
+## 現在の状態（2026-07-31 更新）
 
 ### 完了済み
 - 基本レイアウト・デザイン完成（PC・スマホ対応済み）
@@ -73,6 +73,22 @@
   - キャッチコピー：コーデックスに「越境」コンセプトを伝えて相談→結論は「キャッチは残し、説明文で回収」。説明文を「生木と手道具から、3DCADや生成AIまで。大学で木工を教えながら、器、家具、道具、デジタルツールをつくっています。」に差し替え、2つ目のボタンを About→「相談する」（#contact）に変更（反映済み）
   - 未対応：余白20〜30%減／Blogキュレーション化／作品カードのメタ情報（年・樹種・技法。※要ユーザー提供）／ヒーロー40:60（写真が入ってから）
 
+- **椅子の写真を反映（2026-07-31）**：ユーザーが GitHub Web UI から `chair.jpg`（2048×1536・芝生の上の一脚）を main に直アップロード → こちらで加工して組み込み
+  - **写真の受け渡し方法が確立**：ユーザーが GitHub の `Add file → Upload files` でリポジトリ直下にアップロード → Claude が `git pull` で取得 → 加工して `assets/` に配置。Google Drive 経由は不安定なので使わない
+  - 加工方針：原本はリポジトリ直下に残す（ユーザーの元データ）。派生画像を `assets/` に置く
+    - `assets/work-chair.jpg`（1200×900・カード用。椅子を主役にトリミング）
+    - `assets/modal-chair.jpg`（1400×1050・モーダル用。芝生を含む全体構図のまま）
+    - 芝生など高精細な被写体はJPEGが重くなるので quality 76 / progressive / subsampling=2 で 250〜380KB 程度に収める
+  - `<image-slot>` → `<img>` 置き換え時に必要な作業（次の写真でも同じ）：
+    - `.work-thumb image-slot` / `.modal-image image-slot` のCSSセレクタに `img` を追加し `object-fit: cover` を付ける（済）
+    - `.work-thumb:has(img)::before { content: none; }` でプレースホルダーの紙目テクスチャを消す（済）
+    - モーダルJSの `document.querySelectorAll('.modal-image image-slot, .modal-image img')` に `img` を含める（済）
+    - モーダル用 `<img>` は `id="modal-<key>"` と `style="display:none"` を維持すること（JSが表示を切り替える）
+  - 画像加工は Pillow（`pip3 install Pillow`。ImageMagick は未インストール）
+  - Playwright 検証時の注意：`import { chromium } from '/opt/node22/lib/node_modules/playwright/node_modules/playwright-core/index.mjs'` と `chromium.launch({ executablePath: '/opt/pw-browsers/chromium' })` を使う。`'playwright'` の裸のimportは解決できない
+  - サンドボックスでは Google Fonts と Blogger フィードが遮断されエラーになるが本番では正常（検証時に無視してよい）
+  - 残りの写真：hero-photo / work-bowl / work-spoon / work-geoball / about-photo / modal-bowl / modal-spoon
+
 ### ヒーロー画像生成プロンプト（2026-07-01時点の最終版・スプーンのくびれ）
 
 ```
@@ -103,7 +119,8 @@ blade. No face, hands only. Vertical composition, 50mm lens, f/2.0.
 
 - [ ] 写真：ヒーロー右側（作業風景・手元アップなど）← AI生成トライ中断。実物撮影 or 画像をGitHub直アップロードで再挑戦
 - [ ] 写真：About セクションのポートレート
-- [ ] 写真：Works（ボウル／スプーン／椅子）の実物写真 ← 本人が撮影予定
+- [x] 写真：Works の椅子 ← 2026-07-31 反映済み（GitHub直アップロード → assets/ に加工して配置）
+- [ ] 写真：Works の残り（ボウル／スプーン／geo-ballのスクショ）← 本人が撮影予定
 - [x] Apps：geo-ball に差し替え→Worksに統合済み（2026-06-30 完了）
 - [x] Blog：Blogger（gwood-life）連動で自動表示に（2026-06-30 完了。仮タイトル差し替えは不要に）
 - [ ] Works：「越境した仕事」をさらに追加できると新コンセプトが補強される
