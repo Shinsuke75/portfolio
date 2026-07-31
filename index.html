@@ -378,12 +378,17 @@
       );
     }
 
-    .work-thumb image-slot {
+    .work-thumb image-slot,
+    .work-thumb img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
+
+    /* 実写真が入ったサムネイルでは、プレースホルダー用の紙目テクスチャを消す */
+    .work-thumb:has(img)::before { content: none; }
 
     .work-meta-row {
       display: flex;
@@ -479,11 +484,13 @@
       );
     }
 
-    .modal-image image-slot {
+    .modal-image image-slot,
+    .modal-image img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     .modal-body { padding: 2.25rem 2.5rem; }
@@ -1102,7 +1109,7 @@
       </div>
       <div class="work-card" data-modal="chair" role="button" tabindex="0">
         <div class="work-thumb">
-          <image-slot id="work-chair" shape="rect" placeholder="生木の椅子の写真"></image-slot>
+          <img src="assets/work-chair.jpg" alt="草で編んだ座面をもつ生木の椅子" loading="lazy" decoding="async">
         </div>
         <div class="work-meta-row">
           <div class="work-meta">Greenwood · Chair</div>
@@ -1271,7 +1278,7 @@
     <div class="modal-image" id="modalImage">
       <image-slot id="modal-bowl" shape="rect" placeholder="生木のボウルの写真（大）" style="display:none"></image-slot>
       <image-slot id="modal-spoon" shape="rect" placeholder="スプーンの写真（大）" style="display:none"></image-slot>
-      <image-slot id="modal-chair" shape="rect" placeholder="生木の椅子の写真（大）" style="display:none"></image-slot>
+      <img id="modal-chair" src="assets/modal-chair.jpg" alt="草で編んだ座面をもつ生木の椅子の全体" loading="lazy" decoding="async" style="display:none">
     </div>
     <div class="modal-body">
       <div class="modal-meta" id="modalMeta"></div>
@@ -1334,7 +1341,7 @@
   function openWork(card) {
     const key = card.dataset.modal;
     const w = works[key];
-    document.querySelectorAll('.modal-image image-slot').forEach(s => {
+    document.querySelectorAll('.modal-image image-slot, .modal-image img').forEach(s => {
       s.style.display = (s.id === 'modal-' + key) ? '' : 'none';
     });
     document.getElementById('modalMeta').textContent = w.meta;
