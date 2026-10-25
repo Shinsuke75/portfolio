@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shinsuke Kato — Laboratory Technician &amp; Greenwood Worker</title>
+  <title>Shinsuke Kato — Wood Technician &amp; Greenwood Worker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Noto+Sans+JP:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
@@ -1221,7 +1221,11 @@
       <p class="section-lead">グリーンウッドワーク、道具、素材、デジタルものづくり——興味のある分野について書いています。</p>
     </div>
     <div class="writing-grid fade-in" id="blogList">
-      <div class="blog-loading">記事を読み込んでいます…</div>
+      <!-- 静的フォールバック：フィードが読み込めたらJSが最新記事に差し替えます -->
+      <a href="https://gwood-life.blogspot.com/2026/10/blog-post_20.html" target="_blank" rel="noopener" class="writing-card"><div class="writing-thumb" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihyphenhyphen2SsP0Aumtfx40ZfV_WeWNqYJcSubSFnUTygNwsUviLVUYJF6f39qfsnpVJru0_I3QgJLl5Ny4CWisj1IqE4pFdgq-iGyTuZ8An9wBrj-U61651BY8xKbpZSYWRnj9D43pMInGvPiu2PWVHMbJg7unKI0YeHN2DWIwOupgGBF0EzoxPVsBIfgjWko3d5/w600-h375-p-k-no-nu/01_IMG_0614.jpg')"></div><div class="writing-card-body"><div class="writing-type">作ったモノ</div><div class="writing-title">大学のケヤキが、学生会の看板になるまで</div><div class="writing-meta">2026年10月</div></div></a>
+      <a href="https://gwood-life.blogspot.com/2026/10/blog-post.html" target="_blank" rel="noopener" class="writing-card"><div class="writing-thumb" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjedcVyiPts-c8DhYGMcsqSQt3nk7Qox0Ym7pAQvBXQZ8mXwR8Bdm8JjoDqvQhxqt6Ah-w7I8ulpiPTZX8Q5QugoPM1022yaiVc1VNT4jre0gdfHgKFnmz387K3QKQbUTQfW3DiphGTBS-mlp0DvSqFIz13M2Ed-uwIAHfscUdS43ceZv6l5l7aIK5cYE6/s72-w502-h251-c/%E3%82%B7%E3%83%B3%E5%89%8A%E3%82%8A%E9%A6%ACPOP20261001.jpg')"></div><div class="writing-card-body"><div class="writing-type">グリーンウッドワーク</div><div class="writing-title">シン削り馬、できました</div><div class="writing-meta">2026年10月</div></div></a>
+      <a href="https://gwood-life.blogspot.com/2026/09/blog-post.html" target="_blank" rel="noopener" class="writing-card"><div class="writing-thumb" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG9L_xeVG1XXf3pkrIUEXKNwYutaYOf-GLcv62is28Qklk7s7nn_1EKDnQwcd1dG_H3GzDimV3v6EYl7Se3vvSbEA-_JMgWYvBWQjBBGKIOuu4cheHKcN-f8YBp7m8q9I9u4HWjWltXXaERPS7UycYGz-y9e6mDIGKrNb2-Uz-gS4cxSKB0fA2FSzaHlRm/w600-h375-p-k-no-nu/maruhozo_thumb.png')"></div><div class="writing-card-body"><div class="writing-type">グリーンウッドワーク</div><div class="writing-title">丸ホゾのしくみ</div><div class="writing-meta">2026年9月</div></div></a>
+      <a href="https://gwood-life.blogspot.com/2025/02/blog-post.html" target="_blank" rel="noopener" class="writing-card"><div class="writing-thumb" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuajWJzCPDzt59BiQTZm2751jSKj_JK4Hh4LRJVrFKoozD8YSXBdI6N1cEqgxItyNkQurLjQ7FKFcdii7Pa74TpN4JxbE_rguzZsbWIq9snoWf2giFLrz7WGBFtGp705CXdNPNQjmKGtdrKRR-5lG2idf8tupnadVM3vjq3X_RT_Gci2pTp7AZR6_IiKLr/w600-h375-p-k-no-nu/P2180003.jpg')"></div><div class="writing-card-body"><div class="writing-type">Blog</div><div class="writing-title">黒田辰秋展を見て</div><div class="writing-meta">2025年2月</div></div></a>
     </div>
     <div class="blog-more fade-in">
       <a href="https://gwood-life.blogspot.com/" target="_blank" rel="noopener">ブログをすべて見る →</a>
@@ -1390,7 +1394,7 @@
     window.renderBlogPosts = function (data) {
       const entries = (data && data.feed && data.feed.entry) || [];
       if (!entries.length) {
-        list.innerHTML = '<div class="blog-loading">まだ記事がありません。</div>';
+        // 記事が取得できなかった場合は、静的フォールバックのままにする
         return;
       }
       list.innerHTML = entries.map(function (e) {
@@ -1434,8 +1438,7 @@
     const s = document.createElement('script');
     s.src = BLOG_URL + 'feeds/posts/default?alt=json-in-script&callback=renderBlogPosts&max-results=4';
     s.onerror = function () {
-      list.innerHTML = '<div class="blog-loading">記事を読み込めませんでした。 ' +
-        '<a href="' + BLOG_URL + '" target="_blank" rel="noopener">ブログを見る →</a></div>';
+      // 読み込みに失敗した場合は、静的フォールバックのままにする
     };
     document.body.appendChild(s);
   })();
